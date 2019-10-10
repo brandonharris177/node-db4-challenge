@@ -1,7 +1,7 @@
 const db = require('../data/db.config');
 
 module.exports = {
-    // find,
+    find,
     // findById,
     // findSteps,
     // add,
@@ -9,33 +9,33 @@ module.exports = {
     // remove
 };
 
-// function find() {
-//     return db('schemes');
-// }
+function find() {
+    return db('recipes');
+}
 
 // function findById(id) {
-//     return db('schemes')
+//     return db('recipes')
 //     .where({id})
 //     .first();
 // }
 
-// function findSteps(schemeId) {
+// function findSteps(recipeId) {
 //     return db('steps as s')
-//     .join('schemes as sc', 'sc.id', '=', 's.scheme_id')
-//     .where({ scheme_id: schemeId })
-//     .select('s.id', 'sc.scheme_name', 's.step_number', 's.instructions')
+//     .join('recipes as sc', 'sc.id', '=', 's.recipe_id')
+//     .where({ recipe_id: recipeId })
+//     .select('s.id', 'sc.recipe_name', 's.step_number', 's.instructions')
 // }
 
-// function add(newScheme) {
-//     return db('schemes')
-//       .insert(newScheme, 'id')
+// function add(newRecipe) {
+//     return db('recipes')
+//       .insert(newRecipe, 'id')
 //       .then(([id]) => {
 //         return findById(id);
 //       });
 // }
 
 // function update(changes, id) {
-//     return db('schemes')
+//     return db('recipes')
 //     .where('id', `=`, id)
 //     .update(changes, 'id')
 //     .then(res => {
@@ -48,7 +48,7 @@ module.exports = {
 // }
 
 // function remove(id) {
-//     return db('schemes')
+//     return db('recipes')
 //     .where({id})
 //     .del()
 // }
