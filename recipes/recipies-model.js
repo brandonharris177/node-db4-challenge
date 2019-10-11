@@ -2,53 +2,24 @@ const db = require('../data/db.config');
 
 module.exports = {
     find,
-    // findById,
-    // findSteps,
-    // add,
-    // update,
-    // remove
-};
+    findShoppingList,
+    findInstructions
+}
 
 function find() {
     return db('recipes');
 }
 
-// function findById(id) {
-//     return db('recipes')
-//     .where({id})
-//     .first();
-// }
+function findShoppingList(id) {
+    return db('recipe_ingredients as ri')
+    .join('ingredients as i', 'i.id', '=', 'ri.ingredient_id')
+    .where({ recipe_id: id })
+    .select('i.name', 'ri.measurement_type', 'ri.ammount')
+}
 
-// function findSteps(recipeId) {
-//     return db('steps as s')
-//     .join('recipes as sc', 'sc.id', '=', 's.recipe_id')
-//     .where({ recipe_id: recipeId })
-//     .select('s.id', 'sc.recipe_name', 's.step_number', 's.instructions')
-// }
-
-// function add(newRecipe) {
-//     return db('recipes')
-//       .insert(newRecipe, 'id')
-//       .then(([id]) => {
-//         return findById(id);
-//       });
-// }
-
-// function update(changes, id) {
-//     return db('recipes')
-//     .where('id', `=`, id)
-//     .update(changes, 'id')
-//     .then(res => {
-//         if (res === 1) {
-//             return findById(id)
-//         } else {
-//             res.status(500).json('server error')
-//         }
-//       });
-// }
-
-// function remove(id) {
-//     return db('recipes')
-//     .where({id})
-//     .del()
-// }
+function findInstructions(id) {
+    return db('instructions as i')
+    .join('recipes as r', 'r.id', '=', 'i.recipe_id')
+    .where({ recipe_id: id })
+    .select('i.step_number', 'i.description')
+}
